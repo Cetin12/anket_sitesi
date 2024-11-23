@@ -8,9 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-secret-key-here')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['syaxher.pythonanywhere.com']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -99,10 +99,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # HTTPS ayarları
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 SECURE_PROXY_SSL_HEADER = None
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 SECURE_BROWSER_XSS_FILTER = False
 SECURE_CONTENT_TYPE_NOSNIFF = False
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
@@ -121,3 +121,30 @@ if os.getenv('GAE_APPLICATION', None):
             'HOST': '/cloudsql/' + os.environ.get('CLOUD_SQL_CONNECTION_NAME', 'your-connection-name'),
         }
     }
+
+# Production ortamı için değişiklikler
+if not DEBUG:  # Production ortamında
+    ALLOWED_HOSTS = ['syaxher.pythonanywhere.com']  # Sadece sitenizin domain'i
+    
+    # HTTPS ayarları
+    SECURE_SSL_REDIRECT = False  # PythonAnywhere bunu kendisi yapıyor
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    
+    # Güvenlik ayarları
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 yıl
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+else:  # Geliştirme ortamında
+    ALLOWED_HOSTS = ['*']
+    DEBUG = True
+
+# Static dosya ayarları
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')  # Path nesnesini string'e çevirelim
+]

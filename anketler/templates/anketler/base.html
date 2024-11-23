@@ -253,6 +253,45 @@
         .container {
             margin-bottom: 40px;
         }
+    
+        /* Mobil cihazlar için medya sorgusu */
+        @media screen and (max-width: 768px) {
+            #lyricsContainer {
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 60px;  /* Footer'ın üstünde */
+                top: auto;     /* Üst konumu kaldır */
+                transform: none;  /* Ortalama transformunu kaldır */
+                max-width: 100%;
+                max-height: 80px;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                padding: 10px;
+                margin: 0;
+                z-index: 1000;
+            }
+    
+            #currentLyric {
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
+    
+            #nextLyric {
+                font-size: 12px;
+            }
+    
+            /* Ana içerik için alt boşluk */
+            .container {
+                margin-bottom: 150px;  /* Lyrics container ve footer için alan */
+                padding-bottom: 20px;
+            }
+    
+            /* Footer için */
+            .footer {
+                z-index: 1001;  /* Lyrics container'ın üstünde */
+            }
+        }
     </style>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -564,5 +603,6 @@
                 }
             });
         </script>
+        <!-- Müzik kontrolleri -->
     </body>
     </html>
