@@ -1,1 +1,55 @@
- 
+body {
+    background-image: url('../images/arkaplan.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Mobil cihazlar için medya sorgusu */
+@media screen and (max-width: 768px) {
+    #lyricsContainer {
+        position: fixed;
+        bottom: 80px;  /* Alt kısımda sabit pozisyon */
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);  /* Yarı saydam arka plan */
+        padding: 10px;
+        max-height: 100px;  /* Maksimum yükseklik */
+        overflow-y: auto;  /* Kaydırma çubuğu */
+        z-index: 1000;  /* Üstte görünmesi için */
+    }
+
+    #currentLyric {
+        font-size: 14px;  /* Daha küçük yazı */
+        margin-bottom: 5px;
+    }
+
+    #nextLyric {
+        font-size: 12px;  /* Daha da küçük yazı */
+        opacity: 0.8;
+    }
+
+    /* Anket formu için */
+    .poll-form {
+        margin-bottom: 120px;  /* lyrics container için boşluk */
+        padding: 10px;
+    }
+
+    /* Butonlar için */
+    .btn {
+        padding: 8px 16px;
+        margin: 5px;
+        font-size: 14px;
+    }
+
+    /* Müzik kontrolleri için */
+    .music-controls {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        z-index: 1001;
+    }
+}

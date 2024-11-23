@@ -108,45 +108,230 @@
             background: rgba(0, 91, 234, 0.7) !important;
         }
         .navbar {
-            background: rgba(0, 0, 0, 0.2) !important;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 2px 0;
-            min-height: 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: rgba(0, 0, 0, 0.8) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1030;
         }
-        .navbar-brand {
-            font-weight: 500;
-            padding: 0 10px;
-            font-size: 0.95rem;
-            margin-right: 0;
-        }
+
         .navbar .container {
-            max-width: 600px;
-            padding: 0 5px;
+            max-width: 100%;
+            width: 100%;
+            padding: 0 15px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
         }
-        .nav-link {
-            padding: 2px 10px !important;
-            font-size: 0.95rem !important;
-            font-weight: 500;
-            margin-left: 5px;
-            color: rgba(255, 255, 255, 0.9) !important;
+
+        /* Desktop menü */
+        .nav-links-desktop {
+            display: none;
+            width: 100%;
+            height: 100%;
+            align-items: center;
         }
-        .nav-link:hover {
-            color: #fff !important;
-        }
-        .navbar-nav {
+
+        .nav-section {
+            flex: 1;
             display: flex;
             align-items: center;
         }
-        .nav-link.active {
-            color: #fff !important;
+
+        .nav-section:first-child { justify-content: flex-start; }
+        .nav-section:nth-child(2) { justify-content: center; }
+        .nav-section:last-child { justify-content: flex-end; }
+
+        .nav-item {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        /* Mobil menü */
+        .navbar-brand {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            text-decoration: none;
+            padding: 0;
+            margin: 0;
             font-weight: 500;
         }
+        
+        .navbar-brand:hover {
+            color: #fff;
+        }
+
         .navbar-toggler {
-            margin-right: 15px;
-            border-color: rgba(255, 255, 255, 0.1);
-            padding: 2px 6px;
-            font-size: 0.9rem;
+            position: relative;
+            width: 36px;
+            height: 36px;
+            padding: 6px;
+            margin: 0;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-toggler:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar-toggler-icon {
+            position: relative;
+            display: inline-block;
+            width: 20px;
+            height: 2px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler-icon::before,
+        .navbar-toggler-icon::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 20px;
+            height: 2px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler-icon::before {
+            top: -6px;
+        }
+
+        .navbar-toggler-icon::after {
+            bottom: -6px;
+        }
+
+        /* Hamburger menü açık durumu */
+        .navbar-toggler.active .navbar-toggler-icon {
+            background-color: transparent;
+        }
+
+        .navbar-toggler.active .navbar-toggler-icon::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        .navbar-toggler.active .navbar-toggler-icon::after {
+            bottom: 0;
+            transform: rotate(-45deg);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 50px;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            padding: 1rem;
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1029;
+        }
+
+        .mobile-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-item {
+            display: block;
+            width: 100%;
+            padding: 0.875rem 1rem;
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            transform: translateX(-10px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.3px;
+        }
+
+        .mobile-menu-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .mobile-menu.show .mobile-menu-item {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* Kademeli görünme efekti */
+        .mobile-menu.show .mobile-menu-item:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .mobile-menu.show .mobile-menu-item:nth-child(2) {
+            transition-delay: 0.15s;
+        }
+
+        .mobile-menu.show .mobile-menu-item:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+
+        /* Mobil görünüm için ek düzenlemeler */
+        @media (max-width: 767px) {
+            .navbar, .mobile-menu {
+                background: rgba(0, 0, 0, 0.3) !important;
+            }
+
+            .mobile-menu {
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                           0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .nav-links-desktop {
+                display: flex;
+            }
+            
+            .navbar-brand,
+            .navbar-toggler {
+                display: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .nav-links-desktop {
+                display: none;
+            }
         }
     
         /* Şarkı sözleri için stiller */
@@ -214,6 +399,7 @@
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.5s ease;
+            padding-top: 45px;  /* Navbar yüksekliği kadar padding */
         }
     
         .content-wrapper.loaded {
@@ -291,6 +477,230 @@
             .footer {
                 z-index: 1001;  /* Lyrics container'ın üstünde */
             }
+    
+            .navbar {
+                backdrop-filter: blur(2px);
+                background: rgba(0, 0, 0, 0.3) !important;
+                padding: 0 !important;
+                min-height: 45px !important;
+                max-height: 45px !important;
+                z-index: 1030;
+            }
+
+            .navbar-collapse {
+                display: none !important;
+                position: fixed;
+                top: 45px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(2px);
+                padding: 10px 0;
+                z-index: 1029;
+            }
+
+            .navbar-collapse.show {
+                display: block !important;
+            }
+
+            .nav-item {
+                opacity: 1;
+                transform: none;
+            }
+
+            .navbar-nav {
+                padding: 0 15px;
+            }
+
+            .nav-link {
+                padding: 10px 15px !important;
+                margin: 5px 0;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 5px;
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            .navbar-collapse {
+                display: flex !important;
+            }
+            
+            .navbar-toggler {
+                display: none !important;
+            }
+        }
+
+        .nav-links-desktop {
+            display: none;  /* Varsayılan olarak gizli */
+        }
+
+        @media screen and (min-width: 769px) {
+            .nav-links-desktop {
+                display: flex;  /* Sadece geniş ekranda göster */
+                width: 100%;
+                align-items: center;
+            }
+            
+            .navbar-collapse {
+                display: none !important;  /* Geniş ekranda mobil menüyü gizle */
+            }
+            
+            .navbar-toggler {
+                display: none !important;
+            }
+        }
+
+        .nav-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-section:first-child {
+            justify-content: flex-start;
+        }
+
+        .nav-section:last-child {
+            justify-content: flex-end;
+        }
+
+        .nav-item {
+            color: white !important;
+            font-weight: 300 !important;
+            font-size: 1rem !important;
+            padding: 8px 15px !important;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            transform: translateX(5px);
+        }
+
+        @media screen and (min-width: 769px) {
+            .navbar-collapse {
+                display: flex !important;
+            }
+            
+            .navbar-toggler {
+                display: none !important;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar-collapse {
+                display: none !important;
+                position: fixed;
+                top: 45px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(2px);
+                padding: 10px 0;
+                z-index: 1029;
+            }
+
+            .navbar-collapse.show {
+                display: block !important;
+            }
+
+            .nav-item {
+                opacity: 1;
+                transform: none;
+            }
+
+            .navbar-nav {
+                padding: 0 15px;
+            }
+
+            .nav-link {
+                padding: 10px 15px !important;
+                margin: 5px 0;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 5px;
+            }
+        }
+
+        /* Navbar ve menü stilleri */
+        .navbar-collapse {
+            display: none !important;  /* Varsayılan olarak gizli */
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links-desktop {
+                display: none !important;
+            }
+            
+            .navbar-collapse {
+                display: block !important;  /* Sadece mobilde göster */
+                position: fixed;
+                top: 45px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(2px);
+                padding: 10px 0;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease-out;
+                z-index: 1029;
+            }
+
+            .navbar-collapse.show {
+                transform: translateY(0);
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            .nav-links-desktop {
+                display: flex !important;
+            }
+            
+            .navbar-collapse,
+            .navbar-toggler {
+                display: none !important;
+            }
+        }
+
+        /* Navbar ve mobil menü ortak arka plan */
+        .navbar, .mobile-menu {
+            background: rgba(0, 0, 0, 0.3) !important;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Overlay stili */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1028; /* mobile-menu'den bir düşük */
+        }
+
+        .menu-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobil menü z-index düzeltmesi */
+        .navbar {
+            z-index: 1030;
+        }
+
+        .mobile-menu {
+            z-index: 1029;
+            background: rgba(0, 0, 0, 0.75) !important;
         }
     </style>
     <!-- Font Awesome -->
@@ -313,27 +723,35 @@
             <div class="loader"></div>
         </div>
     
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <!-- Navbar HTML yapısı -->
+        <nav class="navbar navbar-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'anketler:index' %}">Ana Sayfa</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Desktop menü -->
+                <div class="nav-links-desktop">
+                    <div class="nav-section">
+                        <a class="nav-item" href="{% url 'anketler:index' %}">Ana Sayfa</a>
+                    </div>
+                    <div class="nav-section">
+                        <a class="nav-item" href="{% url 'anketler:about' %}">Proje Hakkında</a>
+                    </div>
+                </div>
+                
+                <!-- Mobil menü -->
+                <a class="navbar-brand d-md-none" href="{% url 'anketler:index' %}">Ana Sayfa</a>
+                <button class="navbar-toggler d-md-none" type="button" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'anketler:about' %}">Proje Hakkında</a>
-                        </li>
-                        <li class="nav-item">
-                            <button id="restartMusic" class="nav-link btn btn-link">
-                                <i class="fas fa-redo"></i> Müziği Yeniden Başlat
-                            </button>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </nav>
+    
+        <!-- Mobil menü içeriği -->
+        <div class="mobile-menu">
+            <a class="mobile-menu-item" href="{% url 'anketler:index' %}">Ana Sayfa</a>
+            <a class="mobile-menu-item" href="{% url 'anketler:about' %}">Proje Hakkında</a>
+        </div>
+    
+        <!-- Overlay -->
+        <div class="menu-overlay"></div>
     
         <!-- Container'ı content-wrapper ile sarın -->
         <div class="content-wrapper">
@@ -435,7 +853,7 @@
             let muzikDenemeSayisi = 0;
             const MAKSIMUM_DENEME = 5;
     
-            // Müziği başlatma fonksiyonu
+            // Mziği başlatma fonksiyonu
             function muzikBaslat(yenidenDeneme = false) {
                 if (!globalMuzik) {
                     globalMuzik = document.getElementById('arkaPlanMuzik');
@@ -468,7 +886,7 @@
                         }
                     }, 200);
     
-                    // Sözler containerını göster
+                    // Szler containerını göster
                     lyricsContainer.style.display = 'block';
     
                     // Sözleri güncelleme intervalı
@@ -593,16 +1011,48 @@
                 }
             }, true);
     
-            document.getElementById('restartMusic').addEventListener('click', function() {
-                if (globalMuzik) {
-                    globalMuzik.pause();
-                    globalMuzik.currentTime = 0;
-                    currentLyricIndex = 0;
-                    localStorage.removeItem('muzikKonum');
-                    muzikBaslat(true);
+            // Mobil menü kontrolü
+            document.addEventListener('DOMContentLoaded', function() {
+                const menuButton = document.querySelector('.navbar-toggler');
+                const mobileMenu = document.querySelector('.mobile-menu');
+                const menuOverlay = document.querySelector('.menu-overlay');
+
+                // Menü açma/kapama fonksiyonu
+                function toggleMenu() {
+                    menuButton.classList.toggle('active');
+                    mobileMenu.classList.toggle('show');
+                    menuOverlay.classList.toggle('show');
+                    document.body.style.overflow = mobileMenu.classList.contains('show') ? 'hidden' : '';
                 }
+
+                // Menü butonuna tıklama
+                menuButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+
+                // Overlay'e tıklama
+                menuOverlay.addEventListener('click', function() {
+                    toggleMenu();
+                });
+
+                // Menü öğelerine tıklama
+                const menuItems = mobileMenu.querySelectorAll('.mobile-menu-item');
+                menuItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        toggleMenu();
+                    });
+                });
+
+                // Sayfa dışına tıklama
+                document.addEventListener('click', function(e) {
+                    if (mobileMenu.classList.contains('show') && 
+                        !mobileMenu.contains(e.target) && 
+                        !menuButton.contains(e.target)) {
+                        toggleMenu();
+                    }
+                });
             });
         </script>
-        <!-- Müzik kontrolleri -->
     </body>
-    </html>
+</html>
