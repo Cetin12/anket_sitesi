@@ -1,0 +1,28 @@
+{% extends 'anketler/base.html' %}
+
+{% block title %}Anketler{% endblock %}
+
+{% block content %}
+{% if latest_question_list %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Anketler</h2>
+        </div>
+        <div class="card-body">
+            <div class="list-group">
+                {% for question in latest_question_list %}
+                    <a href="{% url 'anketler:detail' question.id %}" class="list-group-item list-group-item-action">
+                        {{ question.question_text }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="card">
+        <div class="card-body">
+            <p class="text-center">Henüz hiç anket yok.</p>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
